@@ -1,0 +1,9 @@
+# avoid putting here your machine-specific stuff (i.e. IDE metadata files - maintain them in your personal global gitignore)
+# maintain only project-specific items (i.e. build artifacts, temporary files of the project lifecycle)
+
+# generally hidden files are ignored
+.*
+!/.gitignore
+
+# "target" folders are ignored recursively
+target/
