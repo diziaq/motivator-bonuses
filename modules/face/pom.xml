@@ -54,6 +54,15 @@
         </spring.boot.jvm.arguments>
       </properties>
     </profile>
+    <profile>
+      <id>atlas_mongo_tls</id>
+      <properties>
+        <!-- temporary ad-hoc for connection with old TLS version (Java uses TLS 1.3 by default)-->
+        <spring.boot.jvm.arguments>
+          -Djdk.tls.client.protocols=TLSv1.2
+        </spring.boot.jvm.arguments>
+      </properties>
+    </profile>
   </profiles>
 
   <build>
