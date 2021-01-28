@@ -1,0 +1,53 @@
+#DateRange
+{
+  "start": "2020-09-01 00:00:00+00:00",
+  "finish": "2021-01-01 00:00:00+00:00"
+}
+
+#ActionStamp
+{
+  "at": "2021-11-03 10:09:08+00:00",
+  "by": "Alexandra Sidorova"
+}
+
+#ExpenceItem
+{
+  "type": "HEALTHCARE",
+  "amount": 10500
+  "description": "Fixed broken finger in NovayaBolnitsa"
+  "spentAt": "2020-10-24 00:00:00+00:00",
+  "published": #ActionStamp
+}
+
+#ExpenseProfile
+{
+  "limit": 100000,
+  "remainder": 89500,
+  "periodOfActivity": #DateRange,
+  "expenses": [
+     #ExpenceItem, #ExpenceItem,
+  ]
+}
+
+
+#PersonBrief
+{
+  "uuid": "e33deaff-16ef-4b8d-92af-c6f48d09585e",
+  "attributes": {
+    "firstName": "Igor",
+    "lastName": "Ivanov",
+    "location": "Ekaterinburg",
+  },
+  "activeExpenseProfile": #ExpenseProfile
+}
+
+
+#PersonFull
+{
+  <include #PersonBrief>
+  ,
+
+  "expenseProfilesHistory": [
+     #ExpenseProfile, #ExpenseProfile,
+  ]
+}
