@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- properties -->
+
+  <springProperty scope="context" name="LOG_LEVEL_ROOT" source="log.level.root" defaultValue="WARN"/>
+  <springProperty scope="context" name="LOG_LEVEL_SPRING" source="log.level.spring" defaultValue="INFO"/>
+  <springProperty scope="context" name="LOG_LEVEL_APP" source="log.level.app" defaultValue="TRACE"/>
+
+  <property name="logEntryPatternSimple"
+            value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-18.25thread] [%-5level] %logger{20} - %msg%n"/>
+
+  <!-- appenders -->
+
+  <appender name="TO_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${logEntryPatternSimple}</pattern>
+    </encoder>
+  </appender>
+
+  <!-- loggers -->
+
+  <root level="${LOG_LEVEL_ROOT}">
+    <appender-ref ref="TO_STDOUT"/>
+  </root>
+
+  <logger name="org.springframework" additivity="false" level="${LOG_LEVEL_SPRING}">
+    <appender-ref ref="TO_STDOUT"/>
+  </logger>
+
+  <logger name="se.fastdev.portal.motivator.bonuses" additivity="false" level="${LOG_LEVEL_APP}">
+    <appender-ref ref="TO_STDOUT"/>
+  </logger>
+
+</configuration>

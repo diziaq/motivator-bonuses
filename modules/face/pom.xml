@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <relativePath>../base/pom.xml</relativePath>
+    <groupId>internal.portal</groupId>
+    <artifactId>motivator-bonuses-base</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <description>Facade module</description>
+  <artifactId>motivator-bonuses-face</artifactId>
+  <packaging>jar</packaging>
+
+  <properties>
+    <result.jar.name>motivator-bonuses-app</result.jar.name>
+    <result.main.class.name>se.fastdev.portal.motivator.bonuses.WebApi</result.main.class.name>
+
+    <spring.boot.jvm.arguments></spring.boot.jvm.arguments><!-- empty by default -->
+
+    <buildinfo.java.details>${java.vendor} | ${java.version} | ${java.version.date}</buildinfo.java.details>
+    <buildinfo.commit.sha>to-be-provided-from-build-agent</buildinfo.commit.sha>
+    <buildinfo.build.counter>to-be-provided-from-build-agent</buildinfo.build.counter>
+
+    <option.test.coverage.ratio>0</option.test.coverage.ratio>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>internal.portal</groupId>
+      <artifactId>motivator-bonuses-core</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>debug</id>
+      <properties>
+        <spring.boot.jvm.arguments>
+          -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+        </spring.boot.jvm.arguments>
+      </properties>
+    </profile>
+  </profiles>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${version.spring.boot}</version>
+        <configuration>
+          <jvmArguments>${spring.boot.jvm.arguments}</jvmArguments>
+          <mainClass>${result.main.class.name}</mainClass>
+          <layout>ZIP</layout>
+          <finalName>${result.jar.name}</finalName>
+        </configuration>
+        <executions>
+          <execution>
+            <id>repackage</id>
+            <phase>package</phase>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>build-info</id>
+            <goals>
+              <goal>build-info</goal>
+            </goals>
+            <configuration>
+              <additionalProperties>
+                <javaDetails>${buildinfo.java.details}</javaDetails>
+                <originCommitDetails>${buildinfo.commit.sha}</originCommitDetails>
+                <buildCounter>${buildinfo.build.counter}</buildCounter>
+              </additionalProperties>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

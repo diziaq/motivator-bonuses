@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- properties -->
+
+  <property name="logEntryPatternSimple"
+            value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-21.25thread] [%-5level] %logger{20} - %msg%n"/>
+
+  <!-- appenders -->
+
+  <appender name="TO_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${logEntryPatternSimple}</pattern>
+    </encoder>
+  </appender>
+
+  <!-- loggers -->
+
+  <root level="WARN">
+    <appender-ref ref="TO_STDOUT"/>
+  </root>
+
+</configuration>
