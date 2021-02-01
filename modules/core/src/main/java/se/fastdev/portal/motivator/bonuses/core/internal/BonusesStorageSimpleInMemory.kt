@@ -14,14 +14,14 @@ internal class BonusesStorageSimpleInMemory : BonusesStorage {
 
     override fun save(person: Person): Mono<Person> {
         personMap[person.uuid] = person
-        return findById(person.uuid)
+        return findByUuid(person.uuid)
     }
 
     override fun findAll(): Flux<Person> {
         return Flux.fromIterable(personMap.values)
     }
 
-    override fun findById(uuid: UUID): Mono<Person> {
+    override fun findByUuid(uuid: UUID): Mono<Person> {
         return Mono.just(uuid)
             .handle { x: UUID, sink: SynchronousSink<Person> ->
                 val person = personMap[x]

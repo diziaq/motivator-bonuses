@@ -19,7 +19,7 @@ internal class BonusesStorageNormal(
         storage.findAll()
             .onErrorMap { e -> BonusesException("Unable to get all persons", e) }
 
-    override fun findById(uuid: UUID): Mono<Person> =
-        storage.findById(uuid)
+    override fun findByUuid(uuid: UUID): Mono<Person> =
+        storage.findByUuid(uuid)
             .onErrorMap { e -> BonusesException("Unable to get person for id $uuid", e) }
 }

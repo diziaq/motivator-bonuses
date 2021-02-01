@@ -10,7 +10,7 @@ public interface BonusesStorage {
 
   Mono<Person> save(Person person);
 
-  Mono<Person> findById(UUID uuid);
+  Mono<Person> findByUuid(UUID uuid);
 
   Flux<Person> findAll();
 

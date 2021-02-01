@@ -15,7 +15,7 @@ public final class BonusesStorageBroken implements BonusesStorage {
   }
 
   @Override
-  public Mono<Person> findById(UUID uuid) {
+  public Mono<Person> findByUuid(UUID uuid) {
     return Mono.error(CommonException.thin("findById(UUID) secret message"));
   }
 

@@ -22,7 +22,7 @@ internal class AdministerPersistent(
         storage.findAll().sort { a, b -> a.attributes.compareTo(b.attributes) }
 
     override fun getPersonById(uuid: UUID): Mono<Person> =
-        storage.findById(uuid)
+        storage.findByUuid(uuid)
 
     override fun startNewExpenseProfile(personUuid: UUID, blueprint: ExpenseProfile.Blueprint): Mono<Person> =
         getPersonById(personUuid)
