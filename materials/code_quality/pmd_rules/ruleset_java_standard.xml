@@ -15,6 +15,7 @@
     <exclude name="ShortMethodName"/>
     <exclude name="ShortClassName"/>
     <exclude name="AtLeastOneConstructor"/>
+    <exclude name="UselessParentheses"/>
   </rule>
   <rule ref="category/java/codestyle.xml/ClassNamingConventions">
     <properties>

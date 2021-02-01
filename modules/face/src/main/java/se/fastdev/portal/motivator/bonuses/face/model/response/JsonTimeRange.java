@@ -1,11 +1,15 @@
 package se.fastdev.portal.motivator.bonuses.face.model.response;
 
-import java.time.Instant;
 import se.fastdev.portal.motivator.bonuses.core.models.TimeRange;
+import se.fastdev.portal.motivator.bonuses.face.extras.validation.UtcTime;
+import se.fastdev.portal.motivator.bonuses.toolbox.conversion.InstantUtil;
 
 public final class JsonTimeRange {
 
+  @UtcTime("start")
   public final String start;
+
+  @UtcTime("finish")
   public final String finish;
 
   private JsonTimeRange(String start, String finish) {
@@ -15,8 +19,8 @@ public final class JsonTimeRange {
 
   public TimeRange toModel() {
     return new TimeRange(
-        Instant.parse(start),
-        Instant.parse(finish)
+        InstantUtil.parse(start),
+        InstantUtil.parse(finish)
     );
   }
 
