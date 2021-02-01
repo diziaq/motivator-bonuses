@@ -4,7 +4,7 @@ import java.math.BigDecimal
 
 data class MoneyAmount(private val amount: Int) {
 
-//    constructor(amount: BigDecimal) : this(amount.multiply(HUNDRED).toInt())
+    constructor(amount: BigDecimal) : this(amount.multiply(HUNDRED).toInt())
 
     fun asBigDecimal(): BigDecimal = BigDecimal(amount).divide(HUNDRED)
 

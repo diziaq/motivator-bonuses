@@ -17,7 +17,7 @@
 
   <properties>
     <result.jar.name>motivator-bonuses-app</result.jar.name>
-    <result.main.class.name>se.fastdev.portal.motivator.bonuses.WebApi</result.main.class.name>
+    <result.main.class.name>se.fastdev.portal.motivator.bonuses.face.WebApi</result.main.class.name>
 
     <spring.boot.jvm.arguments></spring.boot.jvm.arguments><!-- empty by default -->
 

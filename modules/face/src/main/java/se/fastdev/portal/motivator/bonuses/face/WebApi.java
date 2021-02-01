@@ -1,4 +1,4 @@
-package se.fastdev.portal.motivator.bonuses;
+package se.fastdev.portal.motivator.bonuses.face;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
