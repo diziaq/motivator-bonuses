@@ -1,0 +1,18 @@
+version: '3'
+services:
+  motivator:
+    build:
+      context: ../
+      dockerfile: devops/docker/Dockerfile
+    ports:
+      - "8080:80"
+    image: portal-motivator
+    hostname: portal-motivator
+    container_name: portal-motivator
+    environment:
+      APP_ENV: local
+      VAULT_TOKEN: local
+      VAULT_SECRET: local
+    labels:
+      SERVICE_NAME: portal-motivator
+

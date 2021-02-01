@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv sh
+/opt/openjdk-15/bin/java -jar /app.jar --spring.config.additional-location=/application.properties

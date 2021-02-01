@@ -1,0 +1,15 @@
+#!/usr/bin/with-contenv bash
+
+### Run commands every time the container is started
+
+### Get credentials from Vault
+if [ "$VAULT_TOKEN" ] && [ "$VAULT_SECRET" ]; then
+    /bin/echo "Get credentials from Vault"
+    /opt/rattus -template %APP_CONFIG% > %APP_CONFIG%.vault
+    /bin/mv /%APP_CONFIG%.vault /%APP_CONFIG%
+else
+    if [ ! "$VAULT_TOKEN" ]; then /bin/echo '!!! Variable $VAULT_TOKEN is empty !!!'; fi
+    if [ ! "$VAULT_SECRET" ]; then /bin/echo '!!! Variable $VAULT_SECRET is empty !!!'; fi
+    /bin/echo "!!! The container will be stopped !!!"
+    /bin/s6-svscanctl -t /var/run/s6/services
+fi
