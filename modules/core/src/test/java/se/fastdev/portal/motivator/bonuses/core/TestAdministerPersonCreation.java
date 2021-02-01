@@ -1,5 +1,8 @@
 package se.fastdev.portal.motivator.bonuses.core;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -7,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import se.fastdev.portal.motivator.bonuses.core.models.MoneyAmount;
 import se.fastdev.portal.motivator.bonuses.core.models.PersonAttributes;
 
 public final class TestAdministerPersonCreation {
@@ -54,5 +58,32 @@ public final class TestAdministerPersonCreation {
                      .block();
 
     assertEquals(attr, person.getAttributes());
+  }
+
+  @Test
+  @DisplayName("when Person created it should have empty history of expense profiles")
+  public void createdPersonHasEmptyHistory() {
+    var attr = new PersonAttributes("fhajJts", "erjwyjw", "hjktsyag");
+    var person = gate.administer()
+                     .createNewPerson(attr)
+                     .block();
+
+    assertThat(person.getExpenseProfilesHistory(), is(empty()));
+  }
+
+  @Test
+  @DisplayName("when Person created it should have empty active expense profile")
+  public void createdPersonHasEmptyActiveProfile() {
+    var attr = new PersonAttributes("fhajJts", "erjwyjw", "hjktsyag");
+    var person = gate.administer()
+                     .createNewPerson(attr)
+                     .block();
+
+    var profile = person.getActiveExpenseProfile();
+
+    assertAll(
+        () -> assertEquals(new MoneyAmount(0), profile.getLimit()),
+        () -> assertThat(profile.getExpenses(), is(empty()))
+    );
   }
 }

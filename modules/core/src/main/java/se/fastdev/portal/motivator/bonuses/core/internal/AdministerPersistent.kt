@@ -4,6 +4,8 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import se.fastdev.portal.motivator.bonuses.core.BonusesGate.Administer
 import se.fastdev.portal.motivator.bonuses.core.BonusesStorage
+import se.fastdev.portal.motivator.bonuses.core.models.ExpenseItem
+import se.fastdev.portal.motivator.bonuses.core.models.ExpenseProfile
 import se.fastdev.portal.motivator.bonuses.core.models.Person
 import se.fastdev.portal.motivator.bonuses.core.models.PersonAttributes
 import java.util.UUID
@@ -21,4 +23,14 @@ internal class AdministerPersistent(
 
     override fun getPersonById(uuid: UUID): Mono<Person> =
         storage.findById(uuid)
+
+    override fun startNewExpenseProfile(personUuid: UUID, blueprint: ExpenseProfile.Blueprint): Mono<Person> =
+        getPersonById(personUuid)
+            .map { help.startNewExpenseProfile(it, blueprint) }
+            .flatMap(storage::save)
+
+    override fun addNewExpenseItem(personUuid: UUID, blueprint: ExpenseItem.Blueprint): Mono<Person> =
+        getPersonById(personUuid)
+            .map { help.addNewExpenseItem(it, blueprint) }
+            .flatMap(storage::save)
 }

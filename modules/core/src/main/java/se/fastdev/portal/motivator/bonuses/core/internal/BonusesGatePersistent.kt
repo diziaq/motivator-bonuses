@@ -7,6 +7,7 @@ internal class BonusesGatePersistent(
     private val storage: BonusesStorage,
     private val administerHelp: AdministerHelp = AdministerHelp()
 ) : BonusesGate {
+
     override fun administer() =
         AdministerPersistent(storage, administerHelp)
 }
