@@ -19,10 +19,13 @@ class TestEndpointPostPersons {
   WebTestClient client;
 
   StringCapture captureJson;
+  String adminAuth;
 
   @BeforeEach
   void before() {
     captureJson = StringCapture.fromLocalResource("suites/TestEndpointPostPersons");
+    adminAuth =
+        "Bearer " + StringCapture.fromLocalResource("auth/jwt").from("valid_adminPermission.jwt");
   }
 
   @Test
@@ -31,6 +34,7 @@ class TestEndpointPostPersons {
     client
         .post()
         .uri("/admin/persons")
+        .header("AUTHorizATION", adminAuth)
         .body(fromValue(captureJson.from("POST_request_valid.json")))
         .header("CONtenT-typE", "application/json")
         .exchange()
@@ -51,6 +55,7 @@ class TestEndpointPostPersons {
     client
         .post()
         .uri("/admin/persons")
+        .header("authorizATION", adminAuth)
         .body(fromValue(captureJson.from("POST_request_invalid_firstName.json")))
         .header("CONTENT-typE", "application/json")
         .exchange()
@@ -66,6 +71,7 @@ class TestEndpointPostPersons {
     client
         .post()
         .uri("/admin/persons")
+        .header("authorization", adminAuth)
         .body(fromValue(captureJson.from("POST_request_invalid_lastName.json")))
         .header("content-type", "application/json")
         .exchange()
@@ -82,6 +88,7 @@ class TestEndpointPostPersons {
     client
         .post()
         .uri("/admin/persons")
+        .header("authorization", adminAuth)
         .body(fromValue(captureJson.from("POST_request_invalid_location.json")))
         .header("CONtenT-typE", "application/json")
         .exchange()
