@@ -9,19 +9,17 @@ data class Person(
     val expenseProfilesHistory: List<ExpenseProfile>
 ) {
 
+    constructor(uuid: UUID, attributes: PersonAttributes) :
+        this(
+            uuid = uuid,
+            attributes = attributes,
+            activeExpenseProfile = ExpenseProfile(ExpenseProfile.Blueprint.empty()),
+            expenseProfilesHistory = emptyList()
+        )
+
     fun startNewExpenseProfile(expenseProfile: ExpenseProfile) =
         copy(
             activeExpenseProfile = expenseProfile,
             expenseProfilesHistory = listOf(activeExpenseProfile) + expenseProfilesHistory
         )
-
-    companion object {
-        operator fun invoke(attributes: PersonAttributes) =
-            Person(
-                uuid = UUID.randomUUID(),
-                attributes = attributes,
-                activeExpenseProfile = ExpenseProfile(ExpenseProfile.Blueprint.empty()),
-                expenseProfilesHistory = emptyList()
-            )
-    }
 }

@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,5 +26,21 @@ public class TestThrowablesUtil {
         () -> assertThat(
             desc, containsString("Caused by: java.lang.IllegalStateException: oinewrh er j;dsp9fe"))
     );
+  }
+
+  @Test
+  public void testCausesChain() {
+    var first = new IllegalStateException("fasyete6tjrsh 5275yrdsgshqyr");
+    var second = new IllegalArgumentException("grheyhgr wre gwoirgjpworhgoiw", first);
+    var third = new RuntimeException("vojfkwqkvmwjvkc-r 0o ig09reqgq- ugqiwe9gu", second);
+
+    var actualChain = ThrowablesUtil.causesChain(third);
+
+    var expectedString =
+        "java.lang.RuntimeException: vojfkwqkvmwjvkc-r 0o ig09reqgq- ugqiwe9gu\n"
+            + "java.lang.IllegalArgumentException: grheyhgr wre gwoirgjpworhgoiw\n"
+            + "java.lang.IllegalStateException: fasyete6tjrsh 5275yrdsgshqyr";
+
+    assertEquals(expectedString, actualChain);
   }
 }

@@ -29,7 +29,7 @@ final class ParsedErrorAutoStatus implements ParsedError {
   }
 
   private static HttpStatus statusFrom(String message) {
-    final var msg = message.toLowerCase(Locale.ENGLISH);
+    final var msg = message == null ? "" : message.toLowerCase(Locale.ENGLISH);
     HttpStatus status;
 
     if (msg.contains("found")) {

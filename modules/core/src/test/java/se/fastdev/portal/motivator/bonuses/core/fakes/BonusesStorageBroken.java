@@ -7,7 +7,7 @@ import se.fastdev.portal.motivator.bonuses.core.BonusesStorage;
 import se.fastdev.portal.motivator.bonuses.core.models.Person;
 import se.fastdev.portal.motivator.bonuses.toolbox.exceptions.CommonException;
 
-public final class BonusesStorageBroken implements BonusesStorage {
+public class BonusesStorageBroken implements BonusesStorage {
 
   @Override
   public Mono<Person> save(Person person) {

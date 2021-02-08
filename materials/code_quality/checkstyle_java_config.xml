@@ -44,12 +44,12 @@
   </module>
   
   <module name="RegexpMultiline">
-    <property name="message" value="Last line of a block may not be empty"/>
+    <property name="message" value="First line of a block may not be empty"/>
     <property name="format" value="\([^)]*\)\s*\{\s*\n\s*\n"/>
   </module>
 
   <module name="RegexpMultiline">
-    <property name="message" value="First line of a block may not be empty"/>
+    <property name="message" value="Last line of a block may not be empty"/>
     <property name="format" value="\n\s*\n\s*\}"/>
   </module>
 

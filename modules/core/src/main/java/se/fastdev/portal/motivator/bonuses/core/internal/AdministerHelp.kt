@@ -9,8 +9,8 @@ import java.util.UUID
 
 internal class AdministerHelp {
 
-    fun createNewPerson(attributes: PersonAttributes) =
-        Person(attributes)
+    fun createNewPerson(attributes: PersonAttributes, uuid: UUID = UUID.randomUUID()) =
+        Person(uuid, attributes)
 
     fun startNewExpenseProfile(person: Person, blueprint: ExpenseProfile.Blueprint) =
         person.startNewExpenseProfile(ExpenseProfile(blueprint))

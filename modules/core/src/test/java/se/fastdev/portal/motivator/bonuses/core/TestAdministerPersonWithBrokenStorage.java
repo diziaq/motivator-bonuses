@@ -44,10 +44,10 @@ public final class TestAdministerPersonWithBrokenStorage {
   @Test
   @DisplayName("when createNewPerson got error from storage then exception is BonusesException with 'public message'")
   public void testCreateNewPerson() {
-    var personMono = gate.administer().createNewPerson(new PersonAttributes("a", "b", "c"));
+    var personMono = gate.administer().createNewPerson(new PersonAttributes("a", "b", "c", "d"));
 
     var exception = assertThrows(BonusesException.class, () -> personMono.block());
 
-    assertEquals("Unable to save person (a, b, c)", exception.getMessage());
+    assertEquals("Unable to save person (a, b, c, d)", exception.getMessage());
   }
 }

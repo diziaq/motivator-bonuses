@@ -19,24 +19,24 @@ public final class TestPersonAttributesCompareTo {
   public static Stream<Arguments> examples() {
     return Stream.of(
         of(6,
-           new PersonAttributes("paklifksgjmrlkstnjm", "gfkhsldkga", "afhjyutteaf"),
-           new PersonAttributes("jdjgsyjshdhkshjdjs", "afhjsyaehta", "ghgkjsfmdsa")
+           new PersonAttributes("paklifksgjmrlkstnjm", "gfkhsldkga", "afhjyutteaf", "sda"),
+           new PersonAttributes("jdjgsyjshdhkshjdjs", "afhjsyaehta", "ghgkjsfmdsa", "sdgdsg")
         ),
         of(0,
-           new PersonAttributes("paklifksgjmrlkstnjm", "sfaihtmewdcpin", "ghtryA"),
-           new PersonAttributes("paklifksgjmrlkstnjm", "sfaihtmewdcpin", "ghtryA")
+           new PersonAttributes("paklifksgjmrlkstnjm", "sfaihtmewdcpin", "ghtryA", "Loco"),
+           new PersonAttributes("paklifksgjmrlkstnjm", "sfaihtmewdcpin", "ghtryA", "Loco")
         ),
         of(-6,
-           new PersonAttributes("jdjgsyjshdhkshjdjs", "afhjsyaehta", "ghgkjsfmdsa"),
-           new PersonAttributes("paklifksgjmrlkstnjm", "gfkhsldkga", "afhjyutteaf")
+           new PersonAttributes("jdjgsyjshdhkshjdjs", "afhjsyaehta", "ghgkjsfmdsa", "gfh"),
+           new PersonAttributes("paklifksgjmrlkstnjm", "gfkhsldkga", "afhjyutteaf", "hwtwt")
         ),
         of(-15,
-           new PersonAttributes("ITWRUTPOQRTWO", "dkhshksdhk", "i8ruiarytwyt"),
-           new PersonAttributes("ITWRUTPOQRTWO", "sjskjskskh", "etyuw57eoed")
+           new PersonAttributes("ITWRUTPOQRTWO", "i8ruiarytwyt", "dkhshksdhk", "out83t"),
+           new PersonAttributes("ITWRUTPOQRTWO", "etyuw57eoed", "sjskjskskh", "rwgwey545")
         ),
         of(-19,
-           new PersonAttributes("tyqtyywklhjms", "erhjgkjnja", "alashkda"),
-           new PersonAttributes("tyqtyywklhjms", "erhjgkjnja", "tshathuwa")
+           new PersonAttributes("tyqtyywklhjms", "erhjgkjnja", "alashkda", "fdga"),
+           new PersonAttributes("tyqtyywklhjms", "erhjgkjnja", "tshathuwa", "fWE")
         )
     );
   }

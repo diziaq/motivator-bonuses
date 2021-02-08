@@ -10,4 +10,7 @@ internal class BonusesGatePersistent(
 
     override fun administer() =
         AdministerPersistent(storage, administerHelp)
+
+    override fun support() =
+        SupportPersistent(storage)
 }
