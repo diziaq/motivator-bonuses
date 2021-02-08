@@ -19,7 +19,7 @@ import se.fastdev.portal.motivator.bonuses.face.model.response.JsonPersonBrief;
 import se.fastdev.portal.motivator.bonuses.face.model.response.JsonPersonFull;
 
 @DefaultController
-@RequestMapping("persons")
+@RequestMapping("admin/persons")
 public class EndpointsPerson {
 
   private final BonusesGate gate;

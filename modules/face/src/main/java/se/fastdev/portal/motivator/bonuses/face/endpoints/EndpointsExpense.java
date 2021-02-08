@@ -16,7 +16,7 @@ import se.fastdev.portal.motivator.bonuses.face.model.request.JsonExpenseItemAdd
 import se.fastdev.portal.motivator.bonuses.face.model.request.JsonExpenseProfileResetBid;
 
 @DefaultController
-@RequestMapping("persons/{uuid}")
+@RequestMapping("admin/persons/{uuid}")
 public class EndpointsExpense {
 
   private final BonusesGate gate;
@@ -27,7 +27,7 @@ public class EndpointsExpense {
 
   @PostMapping("expenses")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public Mono<String> addNewExpenseItem(
+  public Mono<?> addNewExpenseItem(
       @PathVariable @Uuid("person id") String uuid,
       @Valid @RequestBody JsonExpenseItemAddBid body
   ) {
@@ -36,12 +36,12 @@ public class EndpointsExpense {
     return Mono.just(body)
                .map(x -> x.toModel(uuid))
                .flatMap(model -> gate.administer().addNewExpenseItem(personUuid, model))
-               .map(x -> "success");
+               .then();
   }
 
-  @PostMapping("expense-profile")
+  @PostMapping("expense-profiles")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public Mono<String> startNewExpenseProfile(
+  public Mono<?> startNewExpenseProfile(
       @PathVariable @Uuid("person id") String uuid,
       @Valid @RequestBody JsonExpenseProfileResetBid body
   ) {
@@ -49,10 +49,7 @@ public class EndpointsExpense {
 
     return Mono.just(body)
                .map(JsonExpenseProfileResetBid::toModel)
-               .flatMap(
-                   model -> gate.administer()
-                                .startNewExpenseProfile(personUuid, model)
-               )
-               .map(x -> "success");
+               .flatMap(model -> gate.administer().startNewExpenseProfile(personUuid, model))
+               .then();
   }
 }
