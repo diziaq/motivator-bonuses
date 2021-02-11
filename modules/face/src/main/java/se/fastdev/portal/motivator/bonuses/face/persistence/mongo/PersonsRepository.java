@@ -10,6 +10,10 @@ import reactor.core.publisher.Mono;
 public interface PersonsRepository extends ReactiveMongoRepository<PersonDoc, ObjectId> {
 
   default Mono<PersonDoc> findByUuid(String uuid) {
-    return findOne(Example.of(new PersonDoc(uuid)));
+    return findOne(Example.of(PersonDoc.exampleUuid(uuid)));
+  }
+
+  default Mono<PersonDoc> findByPortalId(String portalId) {
+    return findOne(Example.of(PersonDoc.examplePortalId(portalId)));
   }
 }

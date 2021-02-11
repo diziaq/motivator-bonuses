@@ -14,7 +14,7 @@ import se.fastdev.portal.motivator.bonuses.core.models.BulkProcessReport;
 import se.fastdev.portal.motivator.bonuses.core.models.Person;
 import se.fastdev.portal.motivator.bonuses.core.models.PersonAttributes;
 
-@DisplayName("when storage produce an error for every item ...")
+@DisplayName("when storage produces an error for every item ...")
 public final class TestSupportRefreshAttributesGotErrorsForAllItems {
 
   private BonusesGate gate;

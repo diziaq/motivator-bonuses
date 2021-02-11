@@ -1,0 +1,16 @@
+[
+  {
+    "attributes": {
+      "portalId": "123456789",
+      "firstName": "Aafadfaeq",
+      "lastName": "Gkhkjdsfuposfh",
+      "location": "Yoewiyruwiwkeq"
+    },
+    "activeExpenseProfile": {
+      "limit": 0,
+      "remainder": 0,
+      "expenses": []
+    },
+    "expenseProfilesHistory": []
+  }
+]

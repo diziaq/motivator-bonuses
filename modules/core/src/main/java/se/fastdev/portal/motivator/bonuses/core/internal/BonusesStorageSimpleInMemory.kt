@@ -17,9 +17,13 @@ internal class BonusesStorageSimpleInMemory : BonusesStorage {
         return findByUuid(person.uuid)
     }
 
-    override fun findAll(): Flux<Person> {
-        return Flux.fromIterable(personMap.values)
-    }
+    override fun findByPortalId(portalId: String): Mono<Person> =
+        findAll()
+            .filter { it.attributes.portalId == portalId }
+            .single()
+
+    override fun findAll(): Flux<Person> =
+        Flux.fromIterable(personMap.values)
 
     override fun findByUuid(uuid: UUID): Mono<Person> {
         return Mono.just(uuid)

@@ -20,6 +20,11 @@ public class BonusesStorageBroken implements BonusesStorage {
   }
 
   @Override
+  public Mono<Person> findByPortalId(final String portalId) {
+    return Mono.error(CommonException.thin("findByPortalId(String) secret message"));
+  }
+
+  @Override
   public Flux<Person> findAll() {
     return Flux.error(CommonException.thin("findALl() secret message"));
   }

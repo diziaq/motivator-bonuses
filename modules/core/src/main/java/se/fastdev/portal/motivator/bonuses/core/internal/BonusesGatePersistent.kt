@@ -11,6 +11,9 @@ internal class BonusesGatePersistent(
     override fun administer() =
         AdministerPersistent(storage, administerHelp)
 
+    override fun peep(portalId: String) =
+        PeepPersistent(portalId, storage)
+
     override fun support() =
         SupportPersistent(storage)
 }

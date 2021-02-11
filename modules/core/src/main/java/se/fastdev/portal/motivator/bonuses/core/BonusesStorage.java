@@ -12,6 +12,8 @@ public interface BonusesStorage {
 
   Mono<Person> findByUuid(UUID uuid);
 
+  Mono<Person> findByPortalId(String portalId);
+
   Flux<Person> findAll();
 
   static BonusesStorage inMemory() {

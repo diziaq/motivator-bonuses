@@ -1,0 +1,15 @@
+{
+  "jwt": {
+    "aud": "www.example.com",
+    "sub": "jrocket@example.com",
+    "iss": "portal motivator test",
+    "name": "Funny Bunny",
+    "permission": [
+      "motivator.anyuser.read",
+      "something.rotten"
+    ],
+    "id": "5687",
+    "exp": 2520000000,
+    "iat": 1609000000
+  }
+}

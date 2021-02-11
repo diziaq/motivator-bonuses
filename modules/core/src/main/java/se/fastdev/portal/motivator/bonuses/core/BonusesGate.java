@@ -16,6 +16,8 @@ public interface BonusesGate {
 
   Administer administer();
 
+  Peep peep(String portalId);
+
   Support support();
 
   interface Administer {
@@ -29,6 +31,11 @@ public interface BonusesGate {
     Mono<Person> addNewExpenseItem(UUID personUuid, ExpenseItem.Blueprint blueprint);
 
     Flux<Person> getAllPersons();
+  }
+
+  interface Peep {
+
+    Mono<Person> getOwnedPerson();
   }
 
   interface Support {

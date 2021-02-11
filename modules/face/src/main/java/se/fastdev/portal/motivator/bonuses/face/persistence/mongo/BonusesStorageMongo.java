@@ -33,7 +33,18 @@ public final class BonusesStorageMongo implements BonusesStorage {
                .findByUuid(uuid.toString())
                .map(PersonDoc::toModel)
                .switchIfEmpty(Mono.defer(
-                   () -> Mono.error(CommonException.thin("Not found person with id " + uuid)))
+                   () -> Mono.error(CommonException.thin("Not found person with uuid " + uuid)))
+               );
+  }
+
+  @Override
+  public Mono<Person> findByPortalId(String portalId) {
+    return personsRepository
+               .findByPortalId(portalId)
+               .map(PersonDoc::toModel)
+               .switchIfEmpty(Mono.defer(
+                   () -> Mono.error(
+                       CommonException.thin("Not found person with portalId " + portalId)))
                );
   }
 

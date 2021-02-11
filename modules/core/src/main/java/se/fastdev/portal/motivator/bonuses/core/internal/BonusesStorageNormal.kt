@@ -15,6 +15,10 @@ internal class BonusesStorageNormal(
         storage.save(person)
             .onErrorMap { e -> BonusesException("Unable to save person ${person.attributes}", e) }
 
+    override fun findByPortalId(portalId: String): Mono<Person> =
+        storage.findByPortalId(portalId)
+            .onErrorMap { e -> BonusesException("Unable to get person for portalId $portalId", e) }
+
     override fun findAll(): Flux<Person> =
         storage.findAll()
             .onErrorMap { e -> BonusesException("Unable to get all persons", e) }

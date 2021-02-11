@@ -31,11 +31,6 @@ public final class PersonDoc {
     this.id = id;
   }
 
-  public PersonDoc(String uuid) {
-    // for querying
-    this(uuid, null, null, null);
-  }
-
   private PersonDoc(
       String uuid,
       PersonAttributesDoc attributes,
@@ -48,6 +43,15 @@ public final class PersonDoc {
     this.expenseProfilesHistory = expenseProfilesHistory;
   }
 
+  public Person toModel() {
+    return new Person(
+        UUID.fromString(uuid),
+        attributes.toModel(),
+        activeExpenseProfile.toModel(),
+        ListsUtil.translate(expenseProfilesHistory, ExpenseProfileDoc::toModel)
+    );
+  }
+
   //TODO: move to converter. inject converter into storage
   public static PersonDoc from(Person person) {
     return new PersonDoc(
@@ -58,12 +62,15 @@ public final class PersonDoc {
     );
   }
 
-  public Person toModel() {
-    return new Person(
-        UUID.fromString(uuid),
-        attributes.toModel(),
-        activeExpenseProfile.toModel(),
-        ListsUtil.translate(expenseProfilesHistory, ExpenseProfileDoc::toModel)
-    );
+  public static PersonDoc examplePortalId(String portalId) {
+    final var attributes = new PersonAttributesDoc(portalId, null, null, null);
+    final var doc = new PersonDoc();
+    doc.attributes = attributes;
+
+    return doc;
+  }
+
+  public static PersonDoc exampleUuid(String uuid) {
+    return new PersonDoc(uuid, null, null, null);
   }
 }
