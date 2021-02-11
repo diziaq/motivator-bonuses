@@ -1,9 +1,13 @@
 package se.fastdev.portal.motivator.bonuses.face.model.request;
 
+import javax.validation.constraints.NotBlank;
 import se.fastdev.portal.motivator.bonuses.core.models.PersonAttributes;
 import se.fastdev.portal.motivator.bonuses.face.extras.validation.Name;
 
 public class JsonPersonCreateBid {
+
+  @NotBlank(message = "Expect 'portalId' to be not blank (given: ${validatedValue})")
+  public String portalId;
 
   @Name("firstName")
   public String firstName;
@@ -15,6 +19,6 @@ public class JsonPersonCreateBid {
   public String location;
 
   public PersonAttributes toModel() {
-    return new PersonAttributes(firstName, lastName, location);
+    return new PersonAttributes(portalId, firstName, lastName, location);
   }
 }

@@ -34,7 +34,7 @@
 
   <module name="LineLength">
     <property name="fileExtensions" value="java"/>
-    <property name="max" value="100"/>
+    <property name="max" value="120"/>
     <property name="ignorePattern" value="^package.*|^import.*"/>
   </module>
 
@@ -42,7 +42,7 @@
     <property name="format" value="[ \t]+$"/>
     <property name="message" value="Line may not have a trailing whitespace."/>
   </module>
-  
+
   <module name="RegexpMultiline">
     <property name="message" value="First line of a block may not be empty"/>
     <property name="format" value="\([^)]*\)\s*\{\s*\n\s*\n"/>
@@ -75,7 +75,7 @@
     <module name="EmptyBlock">
       <property name="option" value="TEXT"/>
       <property name="tokens"
-                value="LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, 
+                value="LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE,
                        LITERAL_SWITCH, LITERAL_DO, LITERAL_FOR, LITERAL_WHILE"/>
     </module>
     <module name="NeedBraces">

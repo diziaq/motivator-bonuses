@@ -1,38 +1,24 @@
 package se.fastdev.portal.motivator.bonuses.face.extras.errhandle;
 
-import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import org.springframework.http.HttpStatus;
 
 final class ParsedErrorForParamViolation<T> implements ParsedError {
 
-  private final Collection<T> violations;
-  private final Function<T, String> getMessage;
   private static final int ONE = 1;
+
+  private final List<String> violations;
 
   /* default */ ParsedErrorForParamViolation(
       Collection<T> violations,
       Function<T, String> getMessage
   ) {
-    this.violations = violations;
-    this.getMessage = getMessage;
-  }
-
-  private String wrap(String message) {
-    final var size = violations.size();
-    String result;
-
-    if (size == ONE) {
-      result = "Format violated; " + message;
-    } else if (size > ONE) {
-      result = "Format violated; " + message + "; Violations count: " + size;
-    } else {
-      result = "Unknown violation of input format";
-    }
-
-    return result;
+    this.violations = violations.stream().map(getMessage).sorted().collect(toUnmodifiableList());
   }
 
   @Override
@@ -42,14 +28,28 @@ final class ParsedErrorForParamViolation<T> implements ParsedError {
 
   @Override
   public ErrorResponseBody serverResponseBody() {
-    final var iter = violations.iterator();
-    final var message = iter.hasNext() ? getMessage.apply(iter.next()) : "";
-
-    return new ErrorResponseBody(HttpStatus.BAD_REQUEST, wrap(message));
+    final var message = wrappedMessage(violations.size(), () -> violations.get(0));
+    return new ErrorResponseBody(HttpStatus.BAD_REQUEST, message);
   }
 
   @Override
   public String logMessage() {
-    return violations.stream().map(getMessage).collect(joining("; "));
+    return String.join("; ", violations);
+  }
+
+  // ---
+
+  private static String wrappedMessage(int count, Supplier<String> suppFirst) {
+    String result;
+
+    if (count == ONE) {
+      result = "Format violated; " + suppFirst.get();
+    } else if (count > ONE) {
+      result = "Format violated; " + suppFirst.get() + "; Violations count: " + count;
+    } else {
+      result = "Unknown violation of input format";
+    }
+
+    return result;
   }
 }

@@ -10,10 +10,6 @@ import se.fastdev.portal.motivator.bonuses.face.persistence.mongo.PersonsReposit
 @Configuration
 public class Services {
 
-  /* default */ Services() {
-    // empty
-  }
-
   @Bean
   public BonusesGate bonusesGate(BonusesStorage bonusesStorage) {
     return BonusesGate.createGate(bonusesStorage);
