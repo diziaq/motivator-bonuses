@@ -31,7 +31,8 @@ public class EndpointsAnyUser {
   @ResponseStatus(HttpStatus.OK)
   public Flux<JsonPersonFull> getCurrentUserPersons(@AuthenticationPrincipal JwtPayload jwt) {
     return Mono.just(jwt.claim("email", String.class))
-               .flatMapMany(portalId -> gate.peep(portalId).getOwnedPerson())
-               .map(JsonPersonFull::from);
+               .flatMap(portalId -> gate.peep(portalId).getOwnedPerson())
+               .map(JsonPersonFull::from)
+               .flux();
   }
 }

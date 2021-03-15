@@ -13,6 +13,7 @@ import se.fastdev.portal.motivator.bonuses.core.BonusesGate;
 import se.fastdev.portal.motivator.bonuses.core.models.BulkProcessReport;
 import se.fastdev.portal.motivator.bonuses.core.models.PersonAttributes;
 import se.fastdev.portal.motivator.bonuses.face.extras.DefaultController;
+import se.fastdev.portal.motivator.bonuses.face.model.request.JsonExpenseProfileResetBid;
 import se.fastdev.portal.motivator.bonuses.face.model.request.JsonPortalUserDescription;
 
 @DefaultController
@@ -40,7 +41,21 @@ public class EndpointsSupport {
                .then();
   }
 
+  @PostMapping("/refresh-profiles")
+  @ResponseStatus(HttpStatus.ACCEPTED)
+  public Mono<Void> refreshProfiles(
+      @Valid @RequestBody JsonExpenseProfileResetBid body
+  ) {
+    return Mono.just(body)
+               .map(JsonExpenseProfileResetBid::toModel)
+               .flatMap(model -> gate.support().refreshExpenseProfiles(model))
+               .doOnNext(report -> logReport(log, "Completed expense profiles sync", report))
+               .then();
+  }
+
   private void logReport(Logger log, String header, BulkProcessReport report) {
-    log.info(header + "\n{}", report);
+    if (log.isWarnEnabled()) {
+      log.warn(header + "\n{}", report);
+    }
   }
 }
