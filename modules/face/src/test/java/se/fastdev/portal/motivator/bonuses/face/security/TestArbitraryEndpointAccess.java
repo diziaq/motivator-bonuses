@@ -1,7 +1,5 @@
 package se.fastdev.portal.motivator.bonuses.face.security;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -103,7 +101,7 @@ class TestArbitraryEndpointAccess {
         .jsonPath("error").isEqualTo("Not Found")
         .jsonPath("status").isEqualTo(404)
         .jsonPath("timestamp").exists()
-        .jsonPath("message").value(x -> assertNull(x));
+        .jsonPath("message").doesNotExist();
   }
 
   static Stream<Arguments> samplesJwtMalformed() {
