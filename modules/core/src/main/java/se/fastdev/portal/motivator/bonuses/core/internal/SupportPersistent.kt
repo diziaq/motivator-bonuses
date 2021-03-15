@@ -9,10 +9,8 @@ import se.fastdev.portal.motivator.bonuses.core.internal.util.PersonAttrSyncAccu
 import se.fastdev.portal.motivator.bonuses.core.internal.util.SeqScanner
 import se.fastdev.portal.motivator.bonuses.core.models.BulkProcessReport
 import se.fastdev.portal.motivator.bonuses.core.models.ExpenseProfile
-import se.fastdev.portal.motivator.bonuses.core.models.MoneyAmount
 import se.fastdev.portal.motivator.bonuses.core.models.Person
 import se.fastdev.portal.motivator.bonuses.core.models.PersonAttributes
-import se.fastdev.portal.motivator.bonuses.core.models.TimeRange
 import java.util.function.Function
 import java.util.stream.Stream
 
@@ -48,12 +46,11 @@ internal class SupportPersistent(private val storage: BonusesStorage) : BonusesG
     }
 
     override fun refreshExpenseProfiles(
-        offeredLimitAmount: MoneyAmount,
-        offeredExpensePeriod: TimeRange
+        blueprint: ExpenseProfile.Blueprint
     ): Mono<BulkProcessReport> {
 
-        val offeredProfile = ExpenseProfile(ExpenseProfile.Blueprint(offeredLimitAmount, offeredExpensePeriod))
-        val newStart = offeredExpensePeriod.start
+        val offeredProfile = ExpenseProfile(blueprint)
+        val newStart = blueprint.periodOfActivity.start
         val scanner = SeqScanner<Person>()
 
         val snapshot = storage

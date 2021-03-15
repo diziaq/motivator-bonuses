@@ -60,8 +60,11 @@ public final class TestSupportRefreshExpensePeriodsGotErrorsAndSkippedItems {
 
     this.report = gate.support()
                       .refreshExpenseProfiles(
-                          new MoneyAmount(2000),
-                          new TimeRange(Instant.parse("2021-12-01T07:00:01Z"), Instant.parse("2022-10-01T00:13:01Z"))
+                          new ExpenseProfile.Blueprint(
+                              new MoneyAmount(2000),
+                              new TimeRange(Instant.parse("2021-12-01T07:00:01Z"),
+                                            Instant.parse("2022-10-01T00:13:01Z"))
+                          )
                       )
                       .block();
   }
