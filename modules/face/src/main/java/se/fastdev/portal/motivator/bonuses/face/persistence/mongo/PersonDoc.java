@@ -61,16 +61,4 @@ public final class PersonDoc {
         ListsUtil.translate(person.getExpenseProfilesHistory(), ExpenseProfileDoc::from)
     );
   }
-
-  public static PersonDoc examplePortalId(String portalId) {
-    final var attributes = new PersonAttributesDoc(portalId, null, null, null);
-    final var doc = new PersonDoc();
-    doc.attributes = attributes;
-
-    return doc;
-  }
-
-  public static PersonDoc exampleUuid(String uuid) {
-    return new PersonDoc(uuid, null, null, null);
-  }
 }
