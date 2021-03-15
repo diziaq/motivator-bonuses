@@ -9,8 +9,10 @@ import se.fastdev.portal.motivator.bonuses.core.internal.ConstructionMold;
 import se.fastdev.portal.motivator.bonuses.core.models.BulkProcessReport;
 import se.fastdev.portal.motivator.bonuses.core.models.ExpenseItem;
 import se.fastdev.portal.motivator.bonuses.core.models.ExpenseProfile;
+import se.fastdev.portal.motivator.bonuses.core.models.MoneyAmount;
 import se.fastdev.portal.motivator.bonuses.core.models.Person;
 import se.fastdev.portal.motivator.bonuses.core.models.PersonAttributes;
+import se.fastdev.portal.motivator.bonuses.core.models.TimeRange;
 
 public interface BonusesGate {
 
@@ -43,6 +45,11 @@ public interface BonusesGate {
     <T> Mono<BulkProcessReport> refreshAttributes(
         Stream<PersonAttributes> offeredAttributes,
         Function<PersonAttributes, T> identityProbe
+    );
+
+    Mono<BulkProcessReport> refreshExpenseProfiles(
+        MoneyAmount offeredLimitAmount,
+        TimeRange offeredExpensePeriod
     );
   }
 

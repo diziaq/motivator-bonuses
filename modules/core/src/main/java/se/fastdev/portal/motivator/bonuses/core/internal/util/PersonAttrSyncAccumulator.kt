@@ -1,4 +1,4 @@
-package se.fastdev.portal.motivator.bonuses.core.internal
+package se.fastdev.portal.motivator.bonuses.core.internal.util
 
 import se.fastdev.portal.motivator.bonuses.core.models.Person
 import se.fastdev.portal.motivator.bonuses.core.models.PersonAttributes
@@ -9,7 +9,7 @@ import java.util.function.Function
 import java.util.stream.Collectors.toMap
 import java.util.stream.Stream
 
-internal class FluxScanner<T>(
+internal class PersonAttrSyncAccumulator<T>(
     offeredAttributes: Stream<PersonAttributes>,
     private val identityProbe: Function<PersonAttributes, T>
 ) {

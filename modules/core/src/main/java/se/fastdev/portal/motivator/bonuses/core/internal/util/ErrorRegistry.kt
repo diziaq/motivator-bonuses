@@ -1,4 +1,4 @@
-package se.fastdev.portal.motivator.bonuses.core.internal
+package se.fastdev.portal.motivator.bonuses.core.internal.util
 
 import se.fastdev.portal.motivator.bonuses.toolbox.conversion.ThrowablesUtil
 import java.util.concurrent.ConcurrentLinkedDeque
