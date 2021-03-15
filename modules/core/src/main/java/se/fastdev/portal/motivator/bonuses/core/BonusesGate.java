@@ -50,7 +50,7 @@ public interface BonusesGate {
     );
   }
 
-  static BonusesGate createGate(BonusesStorage storage) {
-    return ConstructionMold.INSTANCE.gateWithStorage(storage);
+  static BonusesGate createGate(BonusesStorage storage, BonusesRes resources) {
+    return ConstructionMold.INSTANCE.gateWithStorage(storage, resources);
   }
 }
